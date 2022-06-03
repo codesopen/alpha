@@ -1,6 +1,29 @@
 # 分享常用脚本工具库
 
 ### Centos - Docker容器便捷部署管理软件
+快速安装条件：
+1. 准备一台4G内存且64位的Centos Linux 主机，推荐使用阿里云ECS;
+2. 请以 root 用户执行如下命令一键安装;
+``` 
+curl -sSL https://github.com/alphaerp/alpha/releases/latest/download/quick-online.sh | sh
+```
+##### 注意事项：
+1. 编写的编排文件命名规范为[服务名-docker-compose.yml];
+2. yml文件需存放在/opt/alpha/docker-composes文件夹下；
+3. 一个yml文件尽可能只编写一个服务，然后用alpha-cli命令管理容器；
+##### alpha-cli语法：
+```
+alpha-cli [服务名] [commands]"
+  commands:
+  status       查看所有服务运行状态"
+  start         启动服务"
+  stop         停止服务"
+  restart      重启服务"
+  reload      重新加载服务"
+  upgrade   升级至最新版本"
+  uninstall   卸载服务"
+```
+##### 举个栗子创建nginx容器，容器服务名定义为nginx，对应的文件名应需是nginx-docker-compose.yml。执行命令 alpha-cli nginx upgrade 
 
 ***
 
