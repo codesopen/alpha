@@ -63,7 +63,8 @@ alpha-cli [服务名] [commands]"
    png-js
    @types/node
    ```
-5. 拉取京东脚本仓库
+5. 拉取京东脚本仓库 
+
 【添加环境变量】
   ```
    名称：JD_COOKIE
@@ -83,6 +84,6 @@ alpha-cli [服务名] [commands]"
    ```
    1) 下载脚本执行命令：ql repo https://github.com/alphaerp/alpha.git "code.sh|task_befor.sh"
    2) 将code.sh和task_befor.sh放入[/ql/data/config/]文件夹目录下
-   3) 检查jdCookie.js内容里的shareCodeLogPath变量路径是否正确
+   3) 检查jdCookie.js内容里的shareCodeLogPath变量路径是否正确(正确完整路径/ql/data/log/.SharenCode/**.log)
    4) 执行task /ql/data/config/code.sh
    ```

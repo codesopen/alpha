@@ -12,7 +12,7 @@ dir_shell=/ql/shell
 repo1='panghu999_jd_scripts'                       #预设的 panghu999 仓库
 repo2='JDHelloWorld_jd_scripts'                    #预设的 JDHelloWorld 仓库
 repo3='he1pu_JDHelp'                               #预设的 he1pu 仓库
-repo4='shufflewzc_faker2'                          #预设的 shufflewzc 仓库
+repo4='shufflewzc_faker2_main'                          #预设的 shufflewzc 仓库
 repo5='Wenmoux_scripts_wen_chinnkarahoi'           #预设的 Wenmoux 仓库，用于读取口袋书店互助码。需提前拉取温某人的仓库或口袋书店脚本并完整运行。
 repo6='Aaron-lv_sync_jd_scripts'                   #预设的 Aaron-lv 仓库
 repo7='smiek2221_scripts'                          #预设的 smiek2221 仓库
@@ -42,6 +42,9 @@ HelpType="4"
 
 ## 定义前 N 个账号优先助力，N 个以后账号间随机助力。front_num="N"，N 定义值小于账号总数，
 front_num="5"
+
+## 定义保存解析日志导出助力码日志文件路径
+dir_config_code="${dir_log}/config_code"
 
 ## 定义指定活动采用指定的互助模板。
 ## 设定值为 DiyHelpType="1" 表示启用功能；不填或填其他内容表示不开启功能。
@@ -531,7 +534,6 @@ help_rules(){
         local new_rule="$(cat $latest_log_path | grep "^$config_name_for_other$j=.\+\'$" | head -1 | sed "s/\S\+'\([^']*\)'$/\1/")"
         local old_rule="$(cat $ShareCode_log | grep "^$config_name_for_other$j=.\+\'$" | sed "s/\S\+'\([^']*\)'$/\1/")"
         if [[ $j -le $user_sum ]]; then
-        	  echo -e "新规则$new_rule,  老规则$old_rule  cat $latest_log_path | grep '^$config_name_for_other$j=.\+\'$'"	
             if [ -z "$(grep "^$config_name_for_other$j" $ShareCode_log)" ]; then
                 sed -i "/^$config_name_for_other$[$j-1]='.*'/ s/$/\n$config_name_for_other$j=''/" $ShareCode_log
             fi
@@ -645,9 +647,8 @@ kill_proc(){
 ## 执行并写入日志
 #kill_proc "code.sh" "grep|$$" >/dev/null 2>&1
 [[ $FixDependType = "1" ]] && [[ "$ps_num" -le $proc_num ]] >/dev/null 2>&1 &
-[[ ! -f $dir_code/code-export.log ]] && touch $dir_code/code-export.log
-latest_log=$(ls -r $dir_code | head -1)
-latest_log_path="$dir_code/$latest_log"
+latest_log_path="${dir_config_code}/code-export.log"
+[[ ! -f $latest_log_path ]] && touch $latest_log_path
 ps_num="$(ps | grep code.sh | grep -v grep | wc -l)"
 export_all_codes | perl -pe "{s|京东种豆|种豆|; s|crazyJoy任务|疯狂的JOY|}"
 sleep 5
