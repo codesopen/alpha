@@ -82,7 +82,7 @@ alpha-cli [服务名] [commands]"
   ```
 【配置助力码】
    ```
-   1) 下载脚本执行命令：ql repo https://github.com/alphaerp/alpha.git "code.sh|task_befor.sh"
+   1) 下载脚本：ql raw https://github.com/alphaerp/alpha/blob/main/code.sh && ql raw https://github.com/alphaerp/alpha/blob/main/task_before.sh
    2) 将code.sh和task_befor.sh放入[/ql/data/config/]文件夹目录下
    3) 检查jdCookie.js内容里的shareCodeLogPath变量路径是否正确(正确完整路径/ql/data/log/.SharenCode/**.log)
    4) 执行task /ql/data/config/code.sh
